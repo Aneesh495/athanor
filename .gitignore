@@ -1,0 +1,26 @@
+# Binaries and object files
+*.o
+*.so
+*.dylib
+*.a
+bin/athanor-bin
+build/
+
+# Common Lisp compiled fasl files
+*.fasl
+*.dx64fsl
+*.lx64fsl
+*.arm64fsl
+*.x86f
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and OS metadata
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
