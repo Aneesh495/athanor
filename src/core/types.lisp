@@ -58,6 +58,17 @@
              (format stream "[Athanor Error] Abstract domain evaluation error in ~A with operands ~S."
                      (domain-op condition) (domain-operands condition)))))
 
+;;; Abstract Analysis Protocol Generics
+
+(defgeneric analysis-make (analysis enode eg)
+  (:documentation "Compute initial lattice element for a newly allocated e-node."))
+
+(defgeneric analysis-join (analysis data1 data2)
+  (:documentation "Lattice join operator for merging analysis values from two equivalent classes."))
+
+(defgeneric analysis-modify (analysis ec eg)
+  (:documentation "Hook invoked after analysis updates; may add nodes or merge classes."))
+
 ;;; Utility Hashing Primitives
 
 (declaim (inline mix-hash))
