@@ -109,11 +109,14 @@
 
    ;; Equality Saturation
    #:saturation-report
+   #:make-saturation-report
+   #:saturation-report-iterations
+   #:saturation-report-nodes
+   #:saturation-report-classes
+   #:saturation-report-converged-p
+   #:saturation-report-time-ms
    #:saturate
    #:saturate-expr
-   #:saturation-converged-p
-   #:saturation-iterations
-   #:saturation-time-ms
 
    ;; Extraction & Cost Models
    #:cost-model
