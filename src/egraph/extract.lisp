@@ -8,8 +8,8 @@
 (defun operator-latency (op)
   "Estimated hardware latency in clock cycles for elementary arithmetic operators."
   (case op
-    ((+ - logand logior logxor not) 1)
-    ((* ash) 3)
+    ((+ - logand logior logxor not ash) 1)
+    ((*) 3)
     ((/ mod) 15)
     ((sqrt) 10)
     ((sin cos tan exp log) 30)

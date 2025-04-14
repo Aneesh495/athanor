@@ -36,6 +36,9 @@
   (dolist (r rules-list rb)
     (add-rule rb r)))
 
+(defparameter *max-matches-per-rule* 40
+  "Maximum number of matches permitted for a single rewrite rule per saturation iteration.")
+
 (defun apply-rules-once (rb eg)
   "Execute a single matching and substitution round for all rules in RB against EG.
    Returns the number of new equality unions enacted."
@@ -49,12 +52,15 @@
       (let* ((lhs (rule-lhs r))
              (rhs (rule-rhs r))
              (guard (rule-condition r))
-             (rule-matches (match-all-classes lhs eg)))
+             (rule-matches (match-all-classes lhs eg))
+             (matched 0))
         (dolist (m rule-matches)
-          (let ((subst (match-subst m))
-                (class-id (match-class-id m)))
-            (when (or (null guard) (funcall guard subst eg))
-              (push (list rhs subst class-id) matches-to-apply))))))
+          (when (< matched *max-matches-per-rule*)
+            (let ((subst (match-subst m))
+                  (class-id (match-class-id m)))
+              (when (or (null guard) (funcall guard subst eg))
+                (push (list rhs subst class-id) matches-to-apply)
+                (incf matched)))))))
 
     ;; Phase 2: Instantiate right-hand sides and perform equality unions
     (dolist (entry matches-to-apply)
