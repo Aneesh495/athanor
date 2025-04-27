@@ -161,6 +161,7 @@
    #:make-datalog-engine
    #:datalog-assert
    #:datalog-retract
+   #:datalog-rule
    #:datalog-query
    #:datalog-fixpoint
 

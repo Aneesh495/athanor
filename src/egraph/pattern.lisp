@@ -2,13 +2,6 @@
 
 (in-package #:athanor)
 
-(defun pattern-var-p (sym)
-  "Return T if SYM is a pattern variable starting with question mark '?'."
-  (and (symbolp sym)
-       (let ((name (symbol-name sym)))
-         (and (> (length name) 1)
-              (char= (char name 0) #\?)))))
-
 (defstruct (pattern (:constructor %make-pattern) (:conc-name pattern-))
   "Structured pattern for matching terms across equivalence classes."
   (ast nil :type t)

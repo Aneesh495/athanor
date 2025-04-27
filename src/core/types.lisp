@@ -87,3 +87,10 @@
      (and (sexpr-equal-p (car x) (car y))
           (sexpr-equal-p (cdr x) (cdr y))))
     (t nil)))
+
+(defun pattern-var-p (sym)
+  "Return T if SYM is a pattern variable starting with question mark '?'."
+  (and (symbolp sym)
+       (let ((name (symbol-name sym)))
+         (and (> (length name) 1)
+              (char= (char name 0) #\?)))))
