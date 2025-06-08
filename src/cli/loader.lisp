@@ -1,0 +1,66 @@
+;;;; loader.lisp - Self-Contained Source Loader for Athanor
+
+(in-package #:cl-user)
+
+(let* ((base (make-pathname :directory (pathname-directory *load-truename*)))
+       (root (merge-pathnames "../" base)))
+  (labels ((load-rel (rel-path)
+             (load (merge-pathnames rel-path root) :verbose nil :print nil)))
+    (load-rel "package.lisp")
+    (load-rel "config.lisp")
+    ;; Core module
+    (load-rel "core/types.lisp")
+    (load-rel "core/union-find.lisp")
+    (load-rel "core/enode.lisp")
+    (load-rel "core/hash-cons.lisp")
+    (load-rel "core/eclass.lisp")
+    ;; E-Graph module
+    (load-rel "egraph/egraph.lisp")
+    (load-rel "egraph/rebuild.lisp")
+    (load-rel "egraph/analysis.lisp")
+    (load-rel "egraph/pattern.lisp")
+    (load-rel "egraph/matcher.lisp")
+    (load-rel "egraph/ac-match.lisp")
+    (load-rel "egraph/rules.lisp")
+    (load-rel "egraph/saturation.lisp")
+    (load-rel "egraph/extract.lisp")
+    ;; Theories module
+    (load-rel "theories/ring.lisp")
+    (load-rel "theories/bitwise.lisp")
+    (load-rel "theories/trig.lisp")
+    (load-rel "theories/tensor.lisp")
+    (load-rel "theories/boolean.lisp")
+    (load-rel "theories/float-stabilize.lisp")
+    ;; Logic module
+    (load-rel "logic/kanren.lisp")
+    (load-rel "logic/clpfd.lisp")
+    (load-rel "logic/tabling.lisp")
+    (load-rel "logic/datalog.lisp")
+    ;; Synthesis module
+    (load-rel "synth/grammar.lisp")
+    (load-rel "synth/observational.lisp")
+    (load-rel "synth/bottom-up.lisp")
+    (load-rel "synth/oracle.lisp")
+    (load-rel "synth/cegis.lisp")
+    ;; Abstract Interpretation module
+    (load-rel "abstract/domain.lisp")
+    (load-rel "abstract/interval.lisp")
+    (load-rel "abstract/sign.lisp")
+    (load-rel "abstract/affine.lisp")
+    (load-rel "abstract/interpreter.lisp")
+    (load-rel "abstract/verifier.lisp")
+    ;; Autodiff module
+    (load-rel "autodiff/dual.lisp")
+    (load-rel "autodiff/symbolic.lisp")
+    (load-rel "autodiff/tape.lisp")
+    (load-rel "autodiff/jacobian.lisp")
+    (load-rel "autodiff/fused-grad.lisp")
+    ;; Codegen module
+    (load-rel "codegen/c-ast.lisp")
+    (load-rel "codegen/emit-c.lisp")
+    (load-rel "codegen/lisp-jit.lisp")
+    (load-rel "codegen/cffi-bridge.lisp")
+    ;; CLI module
+    (load-rel "cli/repl.lisp")
+    (load-rel "cli/dot.lisp")
+    (load-rel "cli/main.lisp")))
