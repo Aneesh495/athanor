@@ -18,15 +18,17 @@
    Returns a SATURATION-REPORT instance."
   (declare (type egraph eg)
            (type rulebase rb)
-           (type fixnum max-iterations node-limit)
-           (type single-float time-limit-seconds))
+           (type integer node-limit)
+           (type (or null integer) max-iterations)
+           (type real time-limit-seconds))
   (let ((start-time (get-internal-real-time))
         (converged nil)
-        (iter-count 0))
+        (iter-count 0)
+        (max-iters (or max-iterations *max-iterations*)))
     ;; Ensure initial state is properly rebuilt and canonical
     (egraph-rebuild eg)
 
-    (loop for iter from 1 to max-iterations
+    (loop for iter from 1 to max-iters
           do (let ((elapsed (/ (- (get-internal-real-time) start-time)
                                (float internal-time-units-per-second 1.0))))
                ;; Timeout check

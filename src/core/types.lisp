@@ -94,3 +94,11 @@
        (let ((name (symbol-name sym)))
          (and (> (length name) 1)
               (char= (char name 0) #\?)))))
+
+(defun op-equal-p (op1 op2)
+  "Test if two operators are equal, ignoring package discrepancies for symbols."
+  (or (equal op1 op2)
+      (and (symbolp op1)
+           (symbolp op2)
+           (string= (symbol-name op1) (symbol-name op2)))))
+

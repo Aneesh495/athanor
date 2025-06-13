@@ -4,6 +4,7 @@
 *.dylib
 *.a
 bin/athanor-bin
+c/bench
 build/
 
 # Common Lisp compiled fasl files

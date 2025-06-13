@@ -13,6 +13,8 @@
     ((/ mod) 15)
     ((sqrt) 10)
     ((sin cos tan exp log) 30)
+    ((matmul) 100)
+    ((gemm) 50)
     (otherwise 1)))
 
 (defun enode-cost (node child-costs model)
@@ -27,6 +29,12 @@
          1))
     (:latency
      (let ((base (operator-latency (enode-op node))))
+       (+ base (reduce #'+ child-costs :initial-value 0))))
+    (:gpu-fused
+     (let ((base (case (enode-op node)
+                   (gemm 20)
+                   (matmul 80)
+                   (otherwise (operator-latency (enode-op node))))))
        (+ base (reduce #'+ child-costs :initial-value 0))))
     (otherwise
      ;; Default: :ast-size

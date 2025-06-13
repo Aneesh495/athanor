@@ -32,10 +32,10 @@
       ((atom pat)
        (let ((ec (get-eclass eg root)))
          (when ec
-           (if (member pat (eclass-nodes ec)
-                       :key #'enode-op
-                       :test (lambda (p op) (and (zerop (length (enode-children (find op (eclass-nodes ec) :key #'enode-op :test #'equal))))
-                                                 (equal p op))))
+           (if (some (lambda (node)
+                       (and (zerop (length (enode-children node)))
+                            (op-equal-p (enode-op node) pat)))
+                     (eclass-nodes ec))
                (list subst)
                nil))))
 
@@ -48,7 +48,7 @@
               (results nil))
          (when ec
            (dolist (node (eclass-nodes ec))
-             (when (and (equal (enode-op node) op)
+             (when (and (op-equal-p (enode-op node) op)
                         (= (length (enode-children node)) num-args))
                ;; Match argument patterns against child e-class IDs sequentially
                (let ((current-substs (list subst)))

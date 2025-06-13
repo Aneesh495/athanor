@@ -22,6 +22,7 @@
    #:unification-failure
    #:synthesis-exhausted-error
    #:abstract-domain-error
+   #:op-equal-p
 
    ;; Core Union-Find
    #:union-find
@@ -134,6 +135,17 @@
    #:boolean-theory
    #:float-stabilize-theory
    #:combined-standard-theory
+   #:matmul
+   #:gemm
+   #:transpose
+   #:eye
+   #:zero-mat
+   #:trace
+   #:relu
+   #:sigmoid
+   #:softmax
+   #:log1p
+   #:expm1
 
    ;; Relational Logic (miniKanren)
    #:var
