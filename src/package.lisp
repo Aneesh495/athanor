@@ -181,11 +181,17 @@
    #:grammar
    #:make-grammar
    #:add-production
+   #:add-terminal
+   #:add-variable
+   #:standard-arithmetic-grammar
    #:grammar-generate
    #:observational-equivalence-table
    #:make-oe-table
    #:oe-lookup-or-insert
    #:bottom-up-synthesize
+   #:oracle
+   #:make-oracle
+   #:verify-candidate
    #:cegis-synthesize
 
    ;; Abstract Interpretation
