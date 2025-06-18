@@ -10,7 +10,7 @@
                (when (consp sub)
                  (let ((op (car sub))
                        (args (cdr sub)))
-                   (when (and (eq op '/) (>= (length args) 2))
+                   (when (and (op-equal-p op '/) (>= (length args) 2))
                      (let* ((denom (second args))
                             (denom-iv (abstract-eval denom env)))
                        (when (interval-contains-zero-p denom-iv)

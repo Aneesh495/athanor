@@ -214,6 +214,7 @@
    #:abstract-eval
    #:verify-division-by-zero-free
    #:verify-interval-bounds
+   #:verify-overflow-free-integer
 
    ;; Automatic Differentiation
    #:dual

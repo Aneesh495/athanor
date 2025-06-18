@@ -9,7 +9,7 @@
     ((numberp expr)
      (make-interval expr expr))
     ((symbolp expr)
-     (let ((iv (cdr (assoc expr env :test #'eq))))
+     (let ((iv (cdr (assoc expr env :test #'op-equal-p))))
        (or iv (make-interval +neg-inf+ +pos-inf+))))
     ((consp expr)
      (let* ((op (car expr))
