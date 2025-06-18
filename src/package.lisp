@@ -234,8 +234,11 @@
    #:c-ast
    #:emit-c-expression
    #:emit-c-function
+   #:emit-c-vector-kernel
    #:compile-expr-to-lisp
+   #:compile-integer-kernel
    #:compile-expr-to-c-shared
+   #:compile-c-source-to-shared
 
    ;; CLI & Visualization
    #:athanor-repl

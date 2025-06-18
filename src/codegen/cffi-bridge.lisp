@@ -25,3 +25,9 @@
           output-path
           (error 'athanor-error
                  :message (format nil "C compilation failed for ~A with command: ~A" c-file cmd))))))
+
+(defun compile-expr-to-c-shared (name expr param-types output-path &optional (return-type 'double))
+  "Compile S-expression EXPR directly to a native dynamic shared library at OUTPUT-PATH defining function NAME."
+  (let ((c-code (emit-c-function name expr param-types return-type)))
+    (compile-c-source-to-shared c-code output-path)))
+
