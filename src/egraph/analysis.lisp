@@ -21,6 +21,11 @@
   ()
   (:documentation "E-class analysis that computes and propagates compile-time constant values."))
 
+(defun make-constant-fold-analysis ()
+  "Construct a constant-folding e-class analysis pass instance."
+  (make-instance 'constant-fold-analysis))
+
+
 (defmethod analysis-make ((analysis constant-fold-analysis) (node enode) eg)
   (let ((op (enode-op node))
         (children (enode-children node)))

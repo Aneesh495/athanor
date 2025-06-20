@@ -93,6 +93,10 @@
   "Return total number of elements allocated in the union-find structure."
   (fill-pointer (union-find-parents uf)))
 
+(defun uf-set-count (uf)
+  "Return current number of disjoint sets."
+  (union-find-set-count uf))
+
 (defun uf-set-size (uf id)
   "Return the cardinality of the equivalence class containing ID."
   (declare (type union-find uf)

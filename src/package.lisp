@@ -27,10 +27,13 @@
    ;; Core Union-Find
    #:union-find
    #:make-union-find
+   #:uf-make-set
    #:uf-find
    #:uf-union
    #:uf-connected-p
    #:uf-count
+   #:uf-set-count
+   #:uf-set-size
    #:uf-roots
 
    ;; Core Hash-Cons & E-Nodes
@@ -79,12 +82,17 @@
    #:analysis-modify
    #:define-analysis
    #:constant-fold-analysis
+   #:make-constant-fold-analysis
    #:interval-analysis
 
    ;; Pattern Language & Matching
    #:pattern
    #:pattern-var-p
    #:parse-pattern
+   #:match
+   #:make-match
+   #:match-subst
+   #:match-class-id
    #:match-pattern
    #:match-all-classes
    #:apply-substitution
@@ -180,6 +188,9 @@
    ;; Inductive Program Synthesis
    #:grammar
    #:make-grammar
+   #:grammar-p
+   #:grammar-variables
+   #:grammar-productions
    #:add-production
    #:add-terminal
    #:add-variable
