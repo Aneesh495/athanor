@@ -1,0 +1,46 @@
+name: Athanor Continuous Integration & Verification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verify-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install sbcl graphviz
+
+      - name: Install Dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sbcl clang graphviz make
+
+      - name: Compile Native C Engine
+        run: make c-lib
+
+      - name: Run Master Lisp Test Suite
+        run: make test
+
+      - name: Run Performance Benchmark Suite
+        run: make bench
+
+      - name: Run Autonomous Verification Audit
+        run: make verify
