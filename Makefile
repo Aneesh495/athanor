@@ -27,7 +27,6 @@ repl:
 clean:
 	$(MAKE) -C c clean
 	rm -f bin/athanor-bin
-	rm -f /tmp/athanor_*
 	find . -type f -name "*.fasl" -delete
 	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 
